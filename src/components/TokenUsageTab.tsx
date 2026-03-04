@@ -211,9 +211,9 @@ function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
   const totalTokens = models.reduce((s, m) => s + m.tokens, 0);
 
   return (
-    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem" }}>
+    <table className="table">
       <thead>
-        <tr style={{ color: "#b7b7bf" }}>
+        <tr>
           <th style={thStyle}>Model</th>
           <th style={thRight}>Tokens</th>
           <th style={thRight}>%</th>
@@ -270,9 +270,9 @@ function SpendBySource({ sessions }: { sessions: TokenUsageSession[] }) {
   };
 
   return (
-    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem" }}>
+    <table className="table">
       <thead>
-        <tr style={{ color: "#b7b7bf" }}>
+        <tr>
           <th style={thStyle}>Source</th>
           <th style={thRight}>Sessions</th>
           <th style={thStyle}>Models</th>
