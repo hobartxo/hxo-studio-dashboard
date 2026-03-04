@@ -93,9 +93,25 @@ Auto-deploy via Cloudflare Pages connected to `main` branch (when configured).
 
 ## Conventions
 
-- Dark theme: `#0a0a0a` background, white text, `#111` card backgrounds
-- Brand colors for accents only, never backgrounds
+- Dark theme: `#0a0a0a` background, white text, navy-tinted panels
+- Brand colors for accents and subtle panel tinting (no loud saturated fills)
 - Avenir Next font family with Montserrat fallback
+
+## Status Cadence (Hard Rule)
+
+When Hobart is actively building/refactoring in this repo, **do not go silent**.
+
+- **ACK immediately**: confirm you’re starting and what you’re doing.
+- **Progress ping every 2–3 minutes** if work is still in-flight, even if it’s just:
+  - “rebasing / resolving conflict”
+  - “CI/build running”
+  - “deploy pending”
+- **Finish with a recap + links**:
+  - PR link
+  - commit SHA (or branch)
+  - where to preview (Pages URL and/or preview deploy URL)
+
+If blocked, ping with: what’s blocked, what you need from Mark, and 1–2 options.
 
 ## Roadmap
 

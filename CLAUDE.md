@@ -93,9 +93,22 @@ Auto-deploy via Cloudflare Pages connected to `main` branch (when configured).
 
 ## Conventions
 
-- Dark theme: `#0a0a0a` background, white text, `#111` card backgrounds
-- Brand colors for accents only, never backgrounds
+- Dark theme: `#0a0a0a` background, white text, navy-tinted panels
+- Brand colors for accents and subtle panel tinting (no loud saturated fills)
 - Avenir Next font family with Montserrat fallback
+
+## Status Cadence (Hard Rule)
+
+If you’re working on changes in this repo, keep Mark informed:
+
+- Start with a 1-line “starting now” + what you’re doing.
+- If work takes >2 minutes, send a progress ping every ~2–3 minutes.
+- When done, send a recap with:
+  - what changed
+  - PR link
+  - where to view the result (Pages URL)
+
+No disappearing mid-task.
 
 ## Roadmap
 
