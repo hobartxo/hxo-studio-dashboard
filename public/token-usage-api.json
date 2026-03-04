@@ -1,0 +1,383 @@
+{
+  "generated_at_utc": "2026-03-04T19:36:11Z",
+  "kpis": {
+    "daily_tokens": 2417200,
+    "estimated_daily_cost_usd": 0,
+    "gemini_percent": 3.200893595896078,
+    "openai_percent": 96.79910640410392
+  },
+  "daily_by_model": [
+    {
+      "date": "2026-03-04",
+      "models": [
+        {
+          "model": "gemini-2.5-flash",
+          "tokens": 77372,
+          "estimated_cost_usd": 0
+        },
+        {
+          "model": "gpt-5.2",
+          "tokens": 1972590,
+          "estimated_cost_usd": 0
+        },
+        {
+          "model": "gpt-5.3-codex",
+          "tokens": 367238,
+          "estimated_cost_usd": 0
+        }
+      ]
+    }
+  ],
+  "sessions_today": [
+    {
+      "session_key": "agent:main:discord:channel:1476703452863135824",
+      "model": "gpt-5.2",
+      "tokens_today": 277018,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:56128a6d-0473-4e71-b061-177611b43852",
+      "model": "gpt-5.2",
+      "tokens_today": 218538,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:779d2a9e-3203-4e93-ba26-0b1081c1d489",
+      "model": "gpt-5.2",
+      "tokens_today": 166816,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde",
+      "model": "gpt-5.2",
+      "tokens_today": 139964,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:89585915-335f-4bd6-bd3a-95296ca3e8a3",
+      "model": "gpt-5.2",
+      "tokens_today": 139964,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:7ebc54ff-0d7d-47ee-9f73-0bed477506fa",
+      "model": "gpt-5.2",
+      "tokens_today": 106198,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:main",
+      "model": "gpt-5.2",
+      "tokens_today": 92482,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:e771e9a0-4c53-44f8-8a17-00f189cc4676",
+      "model": "gpt-5.2",
+      "tokens_today": 85784,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:53db704e-0c5f-4b98-9fe6-4353edadeaf4",
+      "model": "gpt-5.2",
+      "tokens_today": 72074,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1476236139324244141",
+      "model": "gpt-5.2",
+      "tokens_today": 67966,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:f28c731c-9f70-48d5-a2cb-6f789bf92a07",
+      "model": "gpt-5.2",
+      "tokens_today": 53826,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:23630f4c-e7f7-4eaa-a723-ec9d9c5af15f",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 51180,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:91827b59-2c6a-41a0-805f-4c6b19cc7745",
+      "model": "gpt-5.2",
+      "tokens_today": 49164,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:3788307b-d2a3-4785-8e02-4118ac33b60f",
+      "model": "gpt-5.2",
+      "tokens_today": 49114,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:5af892f0-2069-4f82-bfdc-6b9c1a8f33c1",
+      "model": "gpt-5.2",
+      "tokens_today": 46426,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:direct:1379860102374494349",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 39588,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3",
+      "model": "gemini-2.5-flash",
+      "tokens_today": 38686,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:3e940611-55c4-4317-b4e5-73207dc30e03",
+      "model": "gemini-2.5-flash",
+      "tokens_today": 38686,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1476703690290233425",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 35218,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:heartbeat",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 33698,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:1b455d63-d8ae-4071-9d00-93c044cdb5bb",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 30816,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:63178a60-1e34-4d56-ae80-7eb6f395c97b",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 29188,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:40f63880-2a00-47ec-8684-8f1dba66cf79",
+      "model": "gpt-5.2",
+      "tokens_today": 28726,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:bc7f3d13-21cd-4ef5-924b-3eb4fc294953",
+      "model": "gpt-5.2",
+      "tokens_today": 28386,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:bc7f3d13-21cd-4ef5-924b-3eb4fc294953:run:44f04d9b-8375-4a05-bb12-76cc41945cab",
+      "model": "gpt-5.2",
+      "tokens_today": 28386,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:633af3bd-c73f-4726-b38c-04c4dd26e315",
+      "model": "gpt-5.2",
+      "tokens_today": 26864,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:867fe4ed-67ec-4d6d-b460-8c22a88988cd",
+      "model": "gpt-5.2",
+      "tokens_today": 25942,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:46566ffd-f163-4af5-9e4b-7adf8c623773",
+      "model": "gpt-5.2",
+      "tokens_today": 25934,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:47cc519a-0d8d-44f2-8054-e792a6087384",
+      "model": "gpt-5.2",
+      "tokens_today": 25470,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:3e80edf1-3097-45a1-9f74-1d9a8c520324",
+      "model": "gpt-5.2",
+      "tokens_today": 25406,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:4be21f7c-e2a6-4e93-9e1f-5fb27637abf8",
+      "model": "gpt-5.2",
+      "tokens_today": 25390,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:91bf5fdd-50bb-4019-896c-1a31c34ae2ae",
+      "model": "gpt-5.2",
+      "tokens_today": 25340,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:ff0ac7c4-6dd7-41a2-a56f-fdff4939b1f8",
+      "model": "gpt-5.2",
+      "tokens_today": 25326,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:2c1d15b4-9a71-4766-bac0-d72b6a5ca4c0",
+      "model": "gpt-5.2",
+      "tokens_today": 25314,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:6e853778-876e-4371-a430-11c154ee466f",
+      "model": "gpt-5.2",
+      "tokens_today": 25308,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:cc9da067-76cb-4f66-8fde-5cc67c2e4f47",
+      "model": "gpt-5.2",
+      "tokens_today": 25300,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:beaa61c0-531b-4f3c-b758-ddc40f3bdf7c",
+      "model": "gpt-5.2",
+      "tokens_today": 25294,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:486bed67-11e6-48b4-b48e-75f5c5134584",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 25138,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:9a2812b2-7cb9-48a0-830c-9397409849c9",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 19392,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:ba87eca1-b74a-4b81-b087-070ad27f5d4b",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 17492,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:2a2117fe-7534-4776-90c8-9d10ee5720b7",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 16750,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:0cced634-78e2-4f32-8974-97dbb9049549",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 13604,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:1b69531f-35a5-4ea0-953e-9ed7936dc6a7",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 13576,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:9c2e406a-0def-4a7e-bfd7-1f13abb8336b",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 13576,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:75170ba2-1730-473e-8222-5d17acaf6817",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 13564,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:0bba4260-40bb-4085-adba-ecb1e59fc508",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 13208,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1469088039656751138",
+      "model": "gpt-5.2",
+      "tokens_today": 13010,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:c0bd8470-d131-4191-811d-4a718f9f4a4f",
+      "model": "gpt-5.2",
+      "tokens_today": 1860,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1476236140838129787",
+      "model": "gpt-5.3-codex",
+      "tokens_today": 1250,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1475538196329664564",
+      "model": "gpt-5.2",
+      "tokens_today": 0,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-04T19:35:01Z"
+    }
+  ]
+}
