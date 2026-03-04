@@ -13,9 +13,30 @@ body,
 }
 
 body {
+  /* Design tokens */
+  --bg: #0a0a0a;
+  --panel: #0c1118; /* navy-tinted panel */
+  --panel-2: #0b0f14;
+  --border: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.14);
+  --text: #ffffff;
+  --muted: #b7b7bf;
+  --muted-2: rgba(183, 183, 191, 0.75);
+  --accent: #002244;
+  --accent-2: #0a3a6a;
+  --good: #1a8f5c;
+
+  --r-md: 14px;
+  --r-lg: 18px;
+  --gap: 16px;
+  --pad: 16px;
+
+  --shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+
   font-family: "Avenir Next", "Montserrat", system-ui, -apple-system, sans-serif;
-  background: #0a0a0a;
-  color: #ffffff;
+  background: var(--bg);
+  color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -43,36 +64,44 @@ body {
 
 .header .last-updated {
   font-size: 0.8rem;
-  color: #b7b7bf;
+  color: var(--muted);
 }
 
 .tabs {
   display: flex;
-  gap: 0;
-  padding: 20px 32px 0;
-  border-bottom: 1px solid #222;
+  gap: 6px;
+  padding: 18px 32px 0;
+  border-bottom: 1px solid var(--border);
 }
 
 .tab-button {
-  background: none;
-  border: none;
-  color: #b7b7bf;
+  background: transparent;
+  border: 1px solid transparent;
+  color: var(--muted);
   font-family: inherit;
-  font-size: 0.95rem;
-  font-weight: 500;
-  padding: 10px 20px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  padding: 10px 14px;
   cursor: pointer;
-  border-bottom: 2px solid transparent;
-  transition: color 0.15s, border-color 0.15s;
+  border-radius: 999px;
+  transition: background 0.15s, color 0.15s, border-color 0.15s, transform 0.15s;
 }
 
 .tab-button:hover {
-  color: #ffffff;
+  color: var(--text);
+  background: rgba(0, 34, 68, 0.16);
+  border-color: rgba(0, 34, 68, 0.35);
+}
+
+.tab-button:focus-visible {
+  outline: 2px solid rgba(0, 34, 68, 0.7);
+  outline-offset: 2px;
 }
 
 .tab-button.active {
-  color: #ffffff;
-  border-bottom-color: #002244;
+  color: var(--text);
+  background: rgba(0, 34, 68, 0.22);
+  border-color: rgba(0, 34, 68, 0.55);
 }
 
 .tab-content {
