@@ -39,9 +39,20 @@ function estimateCost(model: string, tokens: number): number {
   const key = Object.keys(MODEL_COST_PER_M).find((k) =>
     model.toLowerCase().includes(k.toLowerCase())
   );
-  const rate = key ? MODEL_COST_PER_M[key] : 2.0; // fallback
+  const rate = key ? MODEL_COST_PER_M[key] : 2.0;
   return (tokens / 1_000_000) * rate;
 }
+
+// Known cron job names — maps UUID prefix to human name
+const CRON_NAMES: Record<string, string> = {
+  "718b0c5f": "heartbeat",
+  "bc7f3d13": "standup",
+  "23630f4c": "consolidation",
+  "1b455d63": "weekly-review",
+  "339d2c77": "research-digest",
+  "bc361e6a": "gcp-auth-check",
+  "e9791639": "token-usage-collector",
+};
 
 function fmt(n: number): string {
   return n.toLocaleString("en-US");
@@ -64,43 +75,93 @@ function shortDate(isoDate: string): string {
   });
 }
 
-// Parse session keys into readable names and categories
-type SessionCategory = "cron" | "discord" | "main" | "other";
+// ── Session parsing ──
 
-function categorizeSession(key: string): {
-  category: SessionCategory;
+type SourceGroup = {
+  key: string;
   label: string;
-} {
-  if (key === "agent:main:main") return { category: "main", label: "Main Session" };
+  category: "cron" | "discord" | "main" | "other";
+  models: Map<string, number>; // model → tokens
+  tokens: number;
+  cost: number;
+  sessions: number;
+};
 
-  if (key.includes(":cron:")) {
-    // Extract cron job UUID
-    const match = key.match(/:cron:([a-f0-9-]+)/);
-    const cronId = match ? match[1].slice(0, 8) : "unknown";
-    const isRun = key.includes(":run:");
-    return {
-      category: "cron",
-      label: isRun ? `Cron ${cronId} (subrun)` : `Cron ${cronId}`,
-    };
-  }
-
-  if (key.includes(":discord:")) {
-    if (key.includes(":direct:")) return { category: "discord", label: "Discord DM" };
-    if (key.includes("heartbeat")) return { category: "discord", label: "Heartbeat Channel" };
-    const chanMatch = key.match(/:channel:(\d+)/);
-    const chanId = chanMatch ? chanMatch[1].slice(-6) : "unknown";
-    return { category: "discord", label: `Discord #...${chanId}` };
-  }
-
-  return { category: "other", label: key.slice(0, 30) };
+function getCronId(sessionKey: string): string | null {
+  const match = sessionKey.match(/:cron:([a-f0-9-]+)/);
+  return match ? match[1] : null;
 }
 
-const CATEGORY_LABELS: Record<SessionCategory, string> = {
-  cron: "Cron Jobs",
-  discord: "Discord",
-  main: "Main Session",
-  other: "Other",
-};
+function getCronName(cronUuid: string): string {
+  const prefix = cronUuid.slice(0, 8);
+  return CRON_NAMES[prefix] ?? prefix;
+}
+
+function buildSourceGroups(sessions: TokenUsageSession[]): SourceGroup[] {
+  const map = new Map<string, SourceGroup>();
+
+  for (const s of sessions) {
+    let key: string;
+    let label: string;
+    let category: SourceGroup["category"];
+
+    if (s.session_key === "agent:main:main") {
+      key = "main";
+      label = "Main Session";
+      category = "main";
+    } else if (s.session_key.includes(":cron:")) {
+      const cronUuid = getCronId(s.session_key)!;
+      const name = getCronName(cronUuid);
+      key = `cron:${name}`;
+      label = name;
+      category = "cron";
+    } else if (s.session_key.includes(":discord:")) {
+      if (s.session_key.includes(":direct:")) {
+        key = "discord:dm";
+        label = "Discord DMs";
+      } else if (s.session_key.includes("heartbeat")) {
+        key = "discord:heartbeat";
+        label = "Heartbeat Channel";
+      } else {
+        const chanMatch = s.session_key.match(/:channel:(\d+)/);
+        const chanId = chanMatch ? chanMatch[1] : "unknown";
+        key = `discord:${chanId}`;
+        label = `Channel ...${chanId.slice(-6)}`;
+      }
+      category = "discord";
+    } else {
+      key = `other:${s.session_key.slice(0, 20)}`;
+      label = s.session_key.slice(0, 30);
+      category = "other";
+    }
+
+    const prev = map.get(key) ?? {
+      key,
+      label,
+      category,
+      models: new Map(),
+      tokens: 0,
+      cost: 0,
+      sessions: 0,
+    };
+    prev.tokens += s.tokens_today;
+    prev.cost += estimateCost(s.model, s.tokens_today);
+    prev.sessions += 1;
+    prev.models.set(s.model, (prev.models.get(s.model) ?? 0) + s.tokens_today);
+    map.set(key, prev);
+  }
+
+  return [...map.values()].sort((a, b) => b.cost - a.cost);
+}
+
+function modelsString(models: Map<string, number>): string {
+  return [...models.entries()]
+    .sort((a, b) => b[1] - a[1])
+    .map(([m, t]) => `${m} (${fmt(t)})`)
+    .join(", ");
+}
+
+// ── Styles ──
 
 const cardStyle: React.CSSProperties = {
   border: "1px solid #222",
@@ -122,6 +183,14 @@ const bigValue: React.CSSProperties = {
   fontWeight: 700,
   letterSpacing: "-0.02em",
 };
+
+const thStyle: React.CSSProperties = {
+  textAlign: "left",
+  padding: "8px 6px",
+  borderBottom: "1px solid #222",
+};
+
+const thRight: React.CSSProperties = { ...thStyle, textAlign: "right" };
 
 // ── Cost by Model table ──
 function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
@@ -145,11 +214,11 @@ function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem" }}>
       <thead>
         <tr style={{ color: "#b7b7bf" }}>
-          <th style={{ textAlign: "left", padding: "8px 6px", borderBottom: "1px solid #222" }}>Model</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Tokens</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>% of Total</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Est. Cost</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>% of Cost</th>
+          <th style={thStyle}>Model</th>
+          <th style={thRight}>Tokens</th>
+          <th style={thRight}>%</th>
+          <th style={thRight}>Est. Cost</th>
+          <th style={thRight}>% of Cost</th>
         </tr>
       </thead>
       <tbody>
@@ -180,91 +249,78 @@ function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
   );
 }
 
-// ── Spend by Source (grouped by category) ──
+// ── Spend by Source with subcategories ──
 function SpendBySource({ sessions }: { sessions: TokenUsageSession[] }) {
-  const groups = useMemo(() => {
-    const map = new Map<SessionCategory, { tokens: number; cost: number; count: number }>();
-    for (const s of sessions) {
-      const { category } = categorizeSession(s.session_key);
-      const prev = map.get(category) ?? { tokens: 0, cost: 0, count: 0 };
-      prev.tokens += s.tokens_today;
-      prev.cost += estimateCost(s.model, s.tokens_today);
-      prev.count += 1;
-      map.set(category, prev);
-    }
-    return [...map.entries()]
-      .map(([cat, v]) => ({ category: cat, label: CATEGORY_LABELS[cat], ...v }))
-      .sort((a, b) => b.cost - a.cost);
-  }, [sessions]);
-
+  const groups = useMemo(() => buildSourceGroups(sessions), [sessions]);
   const totalCost = groups.reduce((s, g) => s + g.cost, 0);
+
+  // Group by category for collapsible sections
+  const categories: SourceGroup["category"][] = ["cron", "discord", "main", "other"];
+  const byCategory = new Map<string, SourceGroup[]>();
+  for (const cat of categories) {
+    const items = groups.filter((g) => g.category === cat);
+    if (items.length) byCategory.set(cat, items);
+  }
+
+  const categoryLabels: Record<string, string> = {
+    cron: "Cron Jobs",
+    discord: "Discord",
+    main: "Main Session",
+    other: "Other",
+  };
 
   return (
     <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.85rem" }}>
       <thead>
         <tr style={{ color: "#b7b7bf" }}>
-          <th style={{ textAlign: "left", padding: "8px 6px", borderBottom: "1px solid #222" }}>Source</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Sessions</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Tokens</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Est. Cost</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>% of Cost</th>
+          <th style={thStyle}>Source</th>
+          <th style={thRight}>Sessions</th>
+          <th style={thStyle}>Models</th>
+          <th style={thRight}>Tokens</th>
+          <th style={thRight}>Est. Cost</th>
+          <th style={thRight}>%</th>
         </tr>
       </thead>
       <tbody>
-        {groups.map((g) => (
-          <tr key={g.category} style={{ borderTop: "1px solid #1a1a1a" }}>
-            <td style={{ padding: "6px", fontWeight: 600 }}>{g.label}</td>
-            <td style={{ padding: "6px", textAlign: "right" }}>{g.count}</td>
-            <td style={{ padding: "6px", textAlign: "right" }}>{fmt(g.tokens)}</td>
-            <td style={{ padding: "6px", textAlign: "right", color: g.cost > 1 ? "#e05252" : "#fff" }}>
-              {usd(g.cost)}
-            </td>
-            <td style={{ padding: "6px", textAlign: "right", color: "#b7b7bf" }}>
-              {totalCost ? ((g.cost / totalCost) * 100).toFixed(1) : 0}%
-            </td>
-          </tr>
-        ))}
-      </tbody>
-    </table>
-  );
-}
-
-// ── Top Sessions table ──
-function TopSessions({ sessions }: { sessions: TokenUsageSession[] }) {
-  const rows = useMemo(() => {
-    return sessions
-      .map((s) => ({
-        ...s,
-        ...categorizeSession(s.session_key),
-        estCost: estimateCost(s.model, s.tokens_today),
-      }))
-      .sort((a, b) => b.estCost - a.estCost)
-      .slice(0, 20);
-  }, [sessions]);
-
-  return (
-    <table style={{ width: "100%", borderCollapse: "collapse", fontSize: "0.82rem" }}>
-      <thead>
-        <tr style={{ color: "#b7b7bf" }}>
-          <th style={{ textAlign: "left", padding: "8px 6px", borderBottom: "1px solid #222" }}>Session</th>
-          <th style={{ textAlign: "left", padding: "8px 6px", borderBottom: "1px solid #222" }}>Type</th>
-          <th style={{ textAlign: "left", padding: "8px 6px", borderBottom: "1px solid #222" }}>Model</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Tokens</th>
-          <th style={{ textAlign: "right", padding: "8px 6px", borderBottom: "1px solid #222" }}>Est. Cost</th>
-        </tr>
-      </thead>
-      <tbody>
-        {rows.map((r) => (
-          <tr key={r.session_key} style={{ borderTop: "1px solid #1a1a1a" }}>
-            <td style={{ padding: "6px" }}>{r.label}</td>
-            <td style={{ padding: "6px", color: "#b7b7bf" }}>{r.category}</td>
-            <td style={{ padding: "6px" }}>{r.model}</td>
-            <td style={{ padding: "6px", textAlign: "right" }}>{fmt(r.tokens_today)}</td>
-            <td style={{ padding: "6px", textAlign: "right", color: r.estCost > 0.5 ? "#e05252" : "#fff" }}>
-              {usd(r.estCost)}
-            </td>
-          </tr>
-        ))}
+        {[...byCategory.entries()].map(([cat, items]) => {
+          const catTokens = items.reduce((s, i) => s + i.tokens, 0);
+          const catCost = items.reduce((s, i) => s + i.cost, 0);
+          const catSessions = items.reduce((s, i) => s + i.sessions, 0);
+          return (
+            <Fragment key={cat}>
+              {/* Category header row */}
+              <tr style={{ borderTop: "2px solid #333", background: "#0d0d0d" }}>
+                <td style={{ padding: "10px 6px", fontWeight: 700, fontSize: "0.9rem" }} colSpan={1}>
+                  {categoryLabels[cat]}
+                </td>
+                <td style={{ padding: "10px 6px", textAlign: "right", fontWeight: 700 }}>{catSessions}</td>
+                <td style={{ padding: "10px 6px" }} />
+                <td style={{ padding: "10px 6px", textAlign: "right", fontWeight: 700 }}>{fmt(catTokens)}</td>
+                <td style={{ padding: "10px 6px", textAlign: "right", fontWeight: 700, color: catCost > 1 ? "#e05252" : "#fff" }}>
+                  {usd(catCost)}
+                </td>
+                <td style={{ padding: "10px 6px", textAlign: "right", fontWeight: 700, color: "#b7b7bf" }}>
+                  {totalCost ? ((catCost / totalCost) * 100).toFixed(1) : 0}%
+                </td>
+              </tr>
+              {/* Individual items */}
+              {items.map((item) => (
+                <tr key={item.key} style={{ borderTop: "1px solid #1a1a1a" }}>
+                  <td style={{ padding: "6px 6px 6px 20px", color: "#b7b7bf" }}>{item.label}</td>
+                  <td style={{ padding: "6px", textAlign: "right", color: "#b7b7bf" }}>{item.sessions}</td>
+                  <td style={{ padding: "6px", fontSize: "0.78rem", color: "#888" }}>{modelsString(item.models)}</td>
+                  <td style={{ padding: "6px", textAlign: "right" }}>{fmt(item.tokens)}</td>
+                  <td style={{ padding: "6px", textAlign: "right", color: item.cost > 0.5 ? "#e05252" : "#fff" }}>
+                    {usd(item.cost)}
+                  </td>
+                  <td style={{ padding: "6px", textAlign: "right", color: "#b7b7bf" }}>
+                    {totalCost ? ((item.cost / totalCost) * 100).toFixed(1) : 0}%
+                  </td>
+                </tr>
+              ))}
+            </Fragment>
+          );
+        })}
       </tbody>
     </table>
   );
@@ -282,7 +338,6 @@ function ModelSplitBar({ gemini, openai }: { gemini: number; openai: number }) {
           justifyContent: "space-between",
           marginBottom: 8,
           fontSize: "0.85rem",
-          color: "#b7b7bf",
         }}
       >
         <span style={{ color: "#1a8f5c" }}>Gemini {g.toFixed(1)}%</span>
@@ -361,6 +416,9 @@ function DailyChart({ rows }: { rows: TokenUsageDaily[] }) {
   );
 }
 
+// Need Fragment for grouped rows
+import { Fragment } from "react";
+
 // ── Main component ──
 export function TokenUsageTab({ data }: { data: TokenUsageApi }) {
   const totalCost = useMemo(
@@ -404,8 +462,8 @@ export function TokenUsageTab({ data }: { data: TokenUsageApi }) {
         <CostByModel sessions={data.sessions_today} />
       </section>
 
-      {/* Spend by Source */}
-      <section style={{ ...cardStyle, padding: 16 }}>
+      {/* Spend by Source — with subcategories */}
+      <section style={{ ...cardStyle, padding: 16, overflow: "auto" }}>
         <h3 style={{ marginTop: 0, marginBottom: 12, fontSize: "1rem" }}>Spend by Source</h3>
         <SpendBySource sessions={data.sessions_today} />
       </section>
@@ -414,12 +472,6 @@ export function TokenUsageTab({ data }: { data: TokenUsageApi }) {
       <section style={{ ...cardStyle, padding: 16 }}>
         <h3 style={{ marginTop: 0, marginBottom: 12, fontSize: "1rem" }}>7-Day Usage + Cost</h3>
         <DailyChart rows={data.daily_by_model} />
-      </section>
-
-      {/* Top sessions */}
-      <section style={{ ...cardStyle, padding: 16, overflow: "auto" }}>
-        <h3 style={{ marginTop: 0, marginBottom: 12, fontSize: "1rem" }}>Top 20 Sessions by Cost</h3>
-        <TopSessions sessions={data.sessions_today} />
       </section>
     </div>
   );
