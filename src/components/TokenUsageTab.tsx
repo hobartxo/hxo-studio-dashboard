@@ -80,7 +80,7 @@ function shortDate(isoDate: string): string {
 type SourceGroup = {
   key: string;
   label: string;
-  category: "cron" | "discord" | "main" | "other";
+  category: "cron" | "discord" | "main" | "subscription" | "other";
   models: Map<string, number>; // model → tokens
   tokens: number;
   cost: number;
@@ -201,8 +201,14 @@ function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
       .sort((a, b) => b.cost - a.cost);
   }, [sessions]);
 
-  const totalCost = models.reduce((s, m) => s + m.cost, 0);
-  const totalTokens = models.reduce((s, m) => s + m.tokens, 0);
+  // Add Claude Max subscription models
+  const allModels = [
+    ...models,
+    { model: "claude-sonnet (Max)", tokens: 0, cost: 0 },
+    { model: "claude-opus (Max)", tokens: 0, cost: 0 },
+  ];
+  const totalCost = allModels.reduce((s, m) => s + m.cost, 0);
+  const totalTokens = allModels.reduce((s, m) => s + m.tokens, 0);
 
   return (
     <table className="table table-tight">
@@ -216,18 +222,18 @@ function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
         </tr>
       </thead>
       <tbody>
-        {models.map((m) => (
+        {allModels.map((m) => (
           <tr key={m.model} style={{ borderTop: "1px solid #1a1a1a" }}>
-            <td style={{ padding: "6px", fontWeight: 600 }}>{m.model}</td>
+            <td style={{ padding: "6px", fontWeight: 600, color: m.model.includes("Max") ? "#d97706" : undefined }}>{m.model}</td>
             <td style={{ padding: "6px", textAlign: "right" }}>{fmt(m.tokens)}</td>
             <td style={{ padding: "6px", textAlign: "right", color: "#b7b7bf" }}>
               {totalTokens ? ((m.tokens / totalTokens) * 100).toFixed(1) : 0}%
             </td>
-            <td style={{ padding: "6px", textAlign: "right", color: m.cost > 1 ? "#e05252" : "#fff" }}>
-              {usd(m.cost)}
+            <td style={{ padding: "6px", textAlign: "right", color: m.model.includes("Max") ? "#d97706" : m.cost > 1 ? "#e05252" : "#fff" }}>
+              {m.model.includes("Max") ? "$0 (Max sub)" : usd(m.cost)}
             </td>
             <td style={{ padding: "6px", textAlign: "right", color: "#b7b7bf" }}>
-              {totalCost ? ((m.cost / totalCost) * 100).toFixed(1) : 0}%
+              {m.model.includes("Max") ? "—" : totalCost ? ((m.cost / totalCost) * 100).toFixed(1) + "%" : "0%"}
             </td>
           </tr>
         ))}
@@ -249,10 +255,33 @@ function SpendBySource({ sessions }: { sessions: TokenUsageSession[] }) {
   const totalCost = groups.reduce((s, g) => s + g.cost, 0);
 
   // Group by category for collapsible sections
-  const categories: SourceGroup["category"][] = ["cron", "discord", "main", "other"];
+  // Inject subscription services (not tracked by OpenClaw but important to show)
+  const SUBSCRIPTION_SERVICES: SourceGroup[] = [
+    {
+      key: "sub:claude-max",
+      label: "Nightly Consolidation",
+      category: "subscription",
+      models: new Map([["claude-sonnet (Max)", 0]]),
+      tokens: 0,
+      cost: 0,
+      sessions: 1,
+    },
+    {
+      key: "sub:claude-max-interactive",
+      label: "Interactive Sessions (with Mark)",
+      category: "subscription",
+      models: new Map([["claude-opus (Max)", 0]]),
+      tokens: 0,
+      cost: 0,
+      sessions: 0,
+    },
+  ];
+  const allGroups = [...groups, ...SUBSCRIPTION_SERVICES];
+
+  const categories: SourceGroup["category"][] = ["cron", "discord", "main", "subscription", "other"];
   const byCategory = new Map<string, SourceGroup[]>();
   for (const cat of categories) {
-    const items = groups.filter((g) => g.category === cat);
+    const items = allGroups.filter((g) => g.category === cat);
     if (items.length) byCategory.set(cat, items);
   }
 
@@ -260,6 +289,7 @@ function SpendBySource({ sessions }: { sessions: TokenUsageSession[] }) {
     cron: "Cron Jobs",
     discord: "Discord",
     main: "Main Session",
+    subscription: "Subscription (Claude Max — $0)",
     other: "Other",
   };
 
@@ -321,18 +351,30 @@ function SpendBySource({ sessions }: { sessions: TokenUsageSession[] }) {
 }
 
 // ── Model split bar ──
+// Claude Max subscription tasks are hardcoded since they aren't tracked by OpenClaw.
+// Currently: consolidation (1 nightly run) + interactive sessions with Mark.
+const CLAUDE_MAX_DAILY_TASKS = 2; // consolidation + interactive
+
 function ModelSplitBar({ gemini, openai }: { gemini: number; openai: number }) {
-  const g = Math.max(0, Math.min(100, gemini));
-  const o = Math.max(0, Math.min(100, openai));
+  // Recompute split as 3-way: Gemini, OpenAI, Claude Max
+  // Claude Max gets a share based on task count vs total tasks
+  const apiTasks = 100; // gemini + openai represent 100% of API-tracked work
+  const totalTasks = apiTasks + CLAUDE_MAX_DAILY_TASKS;
+  const scale = apiTasks / totalTasks;
+  const g = Math.max(0, gemini * scale);
+  const o = Math.max(0, openai * scale);
+  const c = Math.max(0, 100 - g - o);
   return (
     <div>
       <div className="split-labels">
         <span className="good">Gemini {g.toFixed(1)}%</span>
         <span className="accent-bright">OpenAI {o.toFixed(1)}%</span>
+        <span style={{ color: "#d97706" }}>Claude {c.toFixed(1)}%</span>
       </div>
       <div className="split-bar">
         <div className="split-seg good" style={{ width: `${g}%` }} />
         <div className="split-seg accent" style={{ width: `${o}%` }} />
+        <div className="split-seg" style={{ width: `${c}%`, background: "#d97706" }} />
       </div>
     </div>
   );
