@@ -14,19 +14,31 @@ body,
 
 body {
   /* ── HXO design tokens (navy-tinted panels on black) ── */
+  /* Brand palette */
+  --navy: #002244;
+  --royal: #00338d;
+  --silver: #b7b7bf;
+  --white: #ffffff;
+
+  /* App surfaces */
   --bg: #07080b;
   --panel: #0b111b;
   --panel-2: #0a0f18;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.14);
-  --text: rgba(255, 255, 255, 0.96);
-  --muted: rgba(255, 255, 255, 0.66);
-  --muted-2: rgba(255, 255, 255, 0.48);
 
-  --accent: #0b2a4a;
-  --accent-2: #1a65ff;
-  --good: #22c55e;
-  --bad: #fb7185;
+  /* Text */
+  --text: rgba(255, 255, 255, 0.96);
+  --muted: var(--silver);
+  --muted-2: rgba(183, 183, 191, 0.75);
+
+  /* Accents */
+  --accent: var(--navy);
+  --accent-2: var(--royal);
+
+  /* Semantics (non-brand) */
+  --good: #1a8f5c;
+  --bad: #e05252;
 
   --r-md: 14px;
   --r-lg: 18px;
@@ -37,8 +49,8 @@ body {
   --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.45);
 
   font-family: "Avenir Next", "Montserrat", system-ui, -apple-system, sans-serif;
-  background: radial-gradient(1200px 800px at 15% -10%, rgba(26, 101, 255, 0.10), transparent 60%),
-    radial-gradient(900px 700px at 85% 0%, rgba(11, 42, 74, 0.18), transparent 55%),
+  background: radial-gradient(1200px 800px at 15% -10%, rgba(0, 51, 141, 0.16), transparent 60%),
+    radial-gradient(900px 700px at 85% 0%, rgba(0, 34, 68, 0.24), transparent 55%),
     var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
