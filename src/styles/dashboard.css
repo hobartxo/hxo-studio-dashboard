@@ -1,0 +1,93 @@
+/* Dashboard-level components (kept separate from App.css tokens) */
+
+.stack {
+  display: grid;
+  gap: 16px;
+}
+
+.kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 14px;
+}
+
+.kpi {
+  padding: 16px;
+}
+
+.kpi-value {
+  font-size: 1.9rem;
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-top: 2px;
+}
+
+.section {
+  padding: 16px;
+}
+
+.section-header {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 12px;
+  margin-bottom: 12px;
+}
+
+.section-title {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 850;
+}
+
+/* Split bar */
+.split-labels {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+  font-size: 0.85rem;
+}
+
+.split-bar {
+  display: flex;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.split-seg {
+  height: 100%;
+}
+
+/* Mini bars used in daily chart */
+.mini-bar {
+  display: flex;
+  border-radius: 999px;
+  overflow: hidden;
+  height: 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.mini-bar-seg {
+  height: 100%;
+}
+
+.daily-row {
+  display: grid;
+  grid-template-columns: 64px 1fr 90px 78px;
+  gap: 10px;
+  align-items: center;
+  font-size: 0.86rem;
+}
+
+/* Tables */
+.table-tight th,
+.table-tight td {
+  padding: 10px 8px;
+}
+
+.table tbody tr:hover {
+  background: rgba(26, 101, 255, 0.10);
+}

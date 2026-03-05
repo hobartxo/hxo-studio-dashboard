@@ -14,30 +14,32 @@ body,
 
 body {
   /* ── HXO design tokens (navy-tinted panels on black) ── */
-  --bg: #0a0a0a;
-  --panel: #0c1118;
-  --panel-2: #0b0f14;
+  --bg: #07080b;
+  --panel: #0b111b;
+  --panel-2: #0a0f18;
   --border: rgba(255, 255, 255, 0.08);
   --border-strong: rgba(255, 255, 255, 0.14);
-  --text: #ffffff;
-  --muted: #b7b7bf;
-  --muted-2: rgba(183, 183, 191, 0.75);
+  --text: rgba(255, 255, 255, 0.96);
+  --muted: rgba(255, 255, 255, 0.66);
+  --muted-2: rgba(255, 255, 255, 0.48);
 
-  --accent: #002244;
-  --accent-2: #0a3a6a;
-  --good: #1a8f5c;
-  --bad: #e05252;
+  --accent: #0b2a4a;
+  --accent-2: #1a65ff;
+  --good: #22c55e;
+  --bad: #fb7185;
 
   --r-md: 14px;
   --r-lg: 18px;
   --gap: 16px;
   --pad: 16px;
 
-  --shadow: 0 10px 32px rgba(0, 0, 0, 0.5);
-  --shadow-soft: 0 6px 18px rgba(0, 0, 0, 0.35);
+  --shadow: 0 18px 50px rgba(0, 0, 0, 0.6);
+  --shadow-soft: 0 10px 28px rgba(0, 0, 0, 0.45);
 
   font-family: "Avenir Next", "Montserrat", system-ui, -apple-system, sans-serif;
-  background: var(--bg);
+  background: radial-gradient(1200px 800px at 15% -10%, rgba(26, 101, 255, 0.10), transparent 60%),
+    radial-gradient(900px 700px at 85% 0%, rgba(11, 42, 74, 0.18), transparent 55%),
+    var(--bg);
   color: var(--text);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -45,32 +47,49 @@ body {
 
 /* Reusable surfaces */
 .card {
-  background: linear-gradient(180deg, var(--panel) 0%, var(--panel-2) 100%);
+  background: linear-gradient(180deg, rgba(11, 17, 27, 0.92) 0%, rgba(10, 15, 24, 0.92) 100%);
   border: 1px solid var(--border);
   border-radius: var(--r-lg);
   box-shadow: var(--shadow-soft);
+  backdrop-filter: blur(8px);
 }
 
 .card:hover {
-  border-color: rgba(0, 34, 68, 0.5);
-  box-shadow: 0 10px 34px rgba(0, 0, 0, 0.55);
+  border-color: rgba(26, 101, 255, 0.22);
+  box-shadow: var(--shadow);
 }
 
 .kicker {
-  font-size: 0.74rem;
+  font-size: 0.72rem;
   color: var(--muted);
   margin-bottom: 8px;
-  letter-spacing: 0.12em;
+  letter-spacing: 0.14em;
   text-transform: uppercase;
 }
 
 .h3 {
   font-size: 1rem;
-  font-weight: 700;
+  font-weight: 800;
 }
 
 .muted {
   color: var(--muted);
+}
+
+.right {
+  text-align: right;
+}
+
+.good {
+  color: var(--good);
+}
+
+.bad {
+  color: var(--bad);
+}
+
+.accent {
+  color: var(--accent-2);
 }
 
 .mono {
