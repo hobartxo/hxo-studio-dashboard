@@ -162,32 +162,26 @@ function modelsString(models: Map<string, number>): string {
 }
 
 // ── Styles ──
+// Keep all visuals driven by App.css tokens/classes. Inline styles here should be
+// layout-only so the page can be reskinned globally.
 
 const cardStyle: React.CSSProperties = {
-  border: "1px solid #222",
-  borderRadius: 12,
   padding: 16,
-  background: "#111",
 };
 
 const labelStyle: React.CSSProperties = {
-  fontSize: "0.75rem",
-  color: "#b7b7bf",
   marginBottom: 6,
-  letterSpacing: "0.06em",
-  textTransform: "uppercase",
 };
 
 const bigValue: React.CSSProperties = {
   fontSize: "1.8rem",
-  fontWeight: 700,
+  fontWeight: 750,
   letterSpacing: "-0.02em",
 };
 
 const thStyle: React.CSSProperties = {
   textAlign: "left",
-  padding: "8px 6px",
-  borderBottom: "1px solid #222",
+  padding: "10px 8px",
 };
 
 const thRight: React.CSSProperties = { ...thStyle, textAlign: "right" };
@@ -211,7 +205,7 @@ function CostByModel({ sessions }: { sessions: TokenUsageSession[] }) {
   const totalTokens = models.reduce((s, m) => s + m.tokens, 0);
 
   return (
-    <table className="table">
+    <table className="table table-tight">
       <thead>
         <tr>
           <th style={thStyle}>Model</th>
@@ -270,7 +264,7 @@ function SpendBySource({ sessions }: { sessions: TokenUsageSession[] }) {
   };
 
   return (
-    <table className="table">
+    <table className="table table-tight">
       <thead>
         <tr>
           <th style={thStyle}>Source</th>
@@ -332,28 +326,13 @@ function ModelSplitBar({ gemini, openai }: { gemini: number; openai: number }) {
   const o = Math.max(0, Math.min(100, openai));
   return (
     <div>
-      <div
-        style={{
-          display: "flex",
-          justifyContent: "space-between",
-          marginBottom: 8,
-          fontSize: "0.85rem",
-        }}
-      >
-        <span style={{ color: "#1a8f5c" }}>Gemini {g.toFixed(1)}%</span>
-        <span style={{ color: "#00338D" }}>OpenAI {o.toFixed(1)}%</span>
+      <div className="split-labels">
+        <span className="good">Gemini {g.toFixed(1)}%</span>
+        <span className="accent">OpenAI {o.toFixed(1)}%</span>
       </div>
-      <div
-        style={{
-          display: "flex",
-          borderRadius: 999,
-          overflow: "hidden",
-          height: 12,
-          background: "#1a1a1a",
-        }}
-      >
-        <div style={{ width: `${g}%`, background: "#1a8f5c" }} />
-        <div style={{ width: `${o}%`, background: "#00338D" }} />
+      <div className="split-bar">
+        <div className="split-seg good" style={{ width: `${g}%` }} />
+        <div className="split-seg accent" style={{ width: `${o}%` }} />
       </div>
     </div>
   );
@@ -373,26 +352,9 @@ function DailyChart({ rows }: { rows: TokenUsageDaily[] }) {
         const total = row.models.reduce((s, m) => s + m.tokens, 0);
         const cost = row.models.reduce((s, m) => s + estimateCost(m.model, m.tokens), 0);
         return (
-          <div
-            key={row.date}
-            style={{
-              display: "grid",
-              gridTemplateColumns: "64px 1fr 90px 70px",
-              gap: 10,
-              alignItems: "center",
-              fontSize: "0.85rem",
-            }}
-          >
-            <div style={{ color: "#b7b7bf" }}>{shortDate(row.date)}</div>
-            <div
-              style={{
-                display: "flex",
-                borderRadius: 999,
-                overflow: "hidden",
-                height: 12,
-                background: "#1a1a1a",
-              }}
-            >
+          <div key={row.date} className="daily-row">
+            <div className="muted">{shortDate(row.date)}</div>
+            <div className="mini-bar">
               {row.models.map((m) => {
                 const width = total === 0 ? 0 : (m.tokens / max) * 100;
                 const color = /gemini/i.test(m.model) ? "#1a8f5c" : "#00338D";
@@ -400,15 +362,14 @@ function DailyChart({ rows }: { rows: TokenUsageDaily[] }) {
                   <div
                     key={m.model}
                     style={{ width: `${width}%`, background: color }}
+                    className="mini-bar-seg"
                     title={`${m.model}: ${fmt(m.tokens)} (${usd(estimateCost(m.model, m.tokens))})`}
                   />
                 );
               })}
             </div>
-            <div style={{ textAlign: "right" }}>{fmt(total)}</div>
-            <div style={{ textAlign: "right", color: cost > 5 ? "#e05252" : "#b7b7bf" }}>
-              {usd(cost)}
-            </div>
+            <div className="right">{fmt(total)}</div>
+            <div className={`right ${cost > 5 ? "bad" : "muted"}`}>{usd(cost)}</div>
           </div>
         );
       })}
@@ -427,50 +388,59 @@ export function TokenUsageTab({ data }: { data: TokenUsageApi }) {
   );
 
   return (
-    <div style={{ display: "grid", gap: 16 }}>
+    <div className="stack">
       {/* KPI row */}
-      <section
-        style={{
-          display: "grid",
-          gridTemplateColumns: "repeat(auto-fit, minmax(180px, 1fr))",
-          gap: 12,
-        }}
-      >
-        <article style={cardStyle}>
-          <div style={labelStyle}>Daily Tokens</div>
-          <div style={bigValue}>{fmt(data.kpis.daily_tokens)}</div>
+      <section className="kpi-grid">
+        <article className="card kpi" style={cardStyle}>
+          <div className="kicker" style={labelStyle}>Daily Tokens</div>
+          <div className="kpi-value" style={bigValue}>{fmt(data.kpis.daily_tokens)}</div>
         </article>
-        <article style={cardStyle}>
-          <div style={labelStyle}>Est. Daily Cost</div>
-          <div style={{ ...bigValue, color: totalCost > 5 ? "#e05252" : "#fff" }}>
+        <article className="card kpi" style={cardStyle}>
+          <div className="kicker" style={labelStyle}>Est. Daily Cost</div>
+          <div className={`kpi-value ${totalCost > 5 ? "bad" : ""}`} style={bigValue}>
             {usd(totalCost)}
           </div>
         </article>
-        <article style={cardStyle}>
-          <div style={labelStyle}>Model Split</div>
+        <article className="card kpi" style={cardStyle}>
+          <div className="kicker" style={labelStyle}>Model Split</div>
           <ModelSplitBar gemini={data.kpis.gemini_percent} openai={data.kpis.openai_percent} />
         </article>
-        <article style={cardStyle}>
-          <div style={labelStyle}>Active Cron Jobs</div>
-          <div style={bigValue}>{data.active_cron_jobs ?? 0}</div>
+        <article className="card kpi" style={cardStyle}>
+          <div className="kicker" style={labelStyle}>Active Cron Jobs</div>
+          <div className="kpi-value" style={bigValue}>{data.active_cron_jobs ?? 0}</div>
         </article>
       </section>
 
       {/* Cost by Model */}
-      <section style={{ ...cardStyle, padding: 16 }}>
-        <h3 style={{ marginTop: 0, marginBottom: 12, fontSize: "1rem" }}>Cost by Model</h3>
+      <section className="card section" style={cardStyle}>
+        <div className="section-header">
+          <div>
+            <div className="kicker">Breakdown</div>
+            <h3 className="section-title">Cost by Model</h3>
+          </div>
+        </div>
         <CostByModel sessions={data.sessions_today} />
       </section>
 
       {/* Spend by Source — with subcategories */}
-      <section style={{ ...cardStyle, padding: 16, overflow: "auto" }}>
-        <h3 style={{ marginTop: 0, marginBottom: 12, fontSize: "1rem" }}>Spend by Source</h3>
+      <section className="card section" style={{ ...cardStyle, overflow: "auto" }}>
+        <div className="section-header">
+          <div>
+            <div className="kicker">Attribution</div>
+            <h3 className="section-title">Spend by Source</h3>
+          </div>
+        </div>
         <SpendBySource sessions={data.sessions_today} />
       </section>
 
       {/* 7-day chart */}
-      <section style={{ ...cardStyle, padding: 16 }}>
-        <h3 style={{ marginTop: 0, marginBottom: 12, fontSize: "1rem" }}>7-Day Usage + Cost</h3>
+      <section className="card section" style={cardStyle}>
+        <div className="section-header">
+          <div>
+            <div className="kicker">Trend</div>
+            <h3 className="section-title">7-Day Usage + Cost</h3>
+          </div>
+        </div>
         <DailyChart rows={data.daily_by_model} />
       </section>
     </div>
