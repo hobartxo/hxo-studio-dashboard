@@ -328,7 +328,7 @@ function ModelSplitBar({ gemini, openai }: { gemini: number; openai: number }) {
     <div>
       <div className="split-labels">
         <span className="good">Gemini {g.toFixed(1)}%</span>
-        <span className="accent">OpenAI {o.toFixed(1)}%</span>
+        <span className="accent-bright">OpenAI {o.toFixed(1)}%</span>
       </div>
       <div className="split-bar">
         <div className="split-seg good" style={{ width: `${g}%` }} />

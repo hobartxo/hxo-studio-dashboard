@@ -104,6 +104,11 @@ body {
   color: var(--accent-2);
 }
 
+/* Utility: brighter accent for small text on dark backgrounds */
+.accent-bright {
+  color: color-mix(in oklab, var(--accent-2) 82%, var(--white));
+}
+
 .mono {
   font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
     "Liberation Mono", "Courier New", monospace;
