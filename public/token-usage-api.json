@@ -1,10 +1,10 @@
 {
-  "generated_at_utc": "2026-03-05T14:49:29Z",
+  "generated_at_utc": "2026-03-05T15:14:43Z",
   "kpis": {
-    "daily_tokens": 3528710,
+    "daily_tokens": 3751178,
     "estimated_daily_cost_usd": 0,
-    "gemini_percent": 80.36086841933738,
-    "openai_percent": 19.63913158066262
+    "gemini_percent": 80.57852759853039,
+    "openai_percent": 19.421472401469618
   },
   "daily_by_model": [
     {
@@ -32,12 +32,12 @@
       "models": [
         {
           "model": "gemini-2.5-flash",
-          "tokens": 2835702,
+          "tokens": 3022644,
           "estimated_cost_usd": 0
         },
         {
           "model": "gpt-5.2",
-          "tokens": 693008,
+          "tokens": 728534,
           "estimated_cost_usd": 0
         }
       ]
@@ -82,16 +82,30 @@
     {
       "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a",
       "model": "gemini-2.5-flash",
-      "tokens_today": 193205,
+      "tokens_today": 212531,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-05T14:45:08Z"
+      "last_active": "2026-03-05T15:12:04Z"
     },
     {
       "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3",
       "model": "gemini-2.5-flash",
-      "tokens_today": 49770,
+      "tokens_today": 123915,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-05T14:45:08Z"
+      "last_active": "2026-03-05T15:12:04Z"
+    },
+    {
+      "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:1c008429-0589-4bcc-bc81-003ea71457d2",
+      "model": "gemini-2.5-flash",
+      "tokens_today": 74145,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-05T15:12:04Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1476236139324244141",
+      "model": "gpt-5.2",
+      "tokens_today": 70689,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-05T15:12:04Z"
     },
     {
       "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:0cd6efaa-0686-412e-92bf-0ecf8ac6097d",
@@ -120,13 +134,6 @@
       "tokens_today": 47080,
       "estimated_cost_usd": 0,
       "last_active": "2026-03-05T01:12:01Z"
-    },
-    {
-      "session_key": "agent:main:discord:channel:1476236139324244141",
-      "model": "gpt-5.2",
-      "tokens_today": 35163,
-      "estimated_cost_usd": 0,
-      "last_active": "2026-03-05T14:45:08Z"
     },
     {
       "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:a845c0dd-0ce9-41b7-8d57-845a4d422d88",
@@ -183,6 +190,13 @@
       "tokens_today": 19326,
       "estimated_cost_usd": 0,
       "last_active": "2026-03-05T14:45:08Z"
+    },
+    {
+      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:515e3326-f084-4b47-baec-77cd96edb777",
+      "model": "gemini-2.5-flash",
+      "tokens_today": 19326,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-05T15:12:04Z"
     },
     {
       "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:bf17d374-f0cc-494e-91e6-3086bce4eb56",
