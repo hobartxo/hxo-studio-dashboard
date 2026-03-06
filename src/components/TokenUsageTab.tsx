@@ -31,8 +31,11 @@ const MODEL_COST_PER_M: Record<string, number> = {
   "gpt-5.2": 3.0,
   "gpt-5.3-codex": 3.0,
   "gpt-5-mini": 0.4,
+  "gemini-3.1-pro": 2.5,
+  "gemini-2.5-pro": 0.5,
   "gemini-2.5-flash": 0.025,
   "gemini-3-flash-preview": 0.025,
+  "gemini-3.1-flash-lite": 0.03,
 };
 
 function estimateCost(model: string, tokens: number): number {
