@@ -52,9 +52,29 @@ const CRON_NAMES: Record<string, string> = {
   "bc7f3d13": "standup",
   "23630f4c": "consolidation",
   "1b455d63": "weekly-review",
-  "339d2c77": "research-digest",
+  "339d2c77": "studio-research-digest",
   "bc361e6a": "gcp-auth-check",
   "e9791639": "token-usage-collector",
+  "9fdeffe7": "cm-research-digest",
+  "e473e14a": "wr-research-digest",
+  "ce4145e6": "wr-inbox-digest",
+};
+
+// Discord channel names — maps channel ID to human name
+const CHANNEL_NAMES: Record<string, string> = {
+  "1469088039656751138": "general",
+  "1469088039656751139": "General",
+  "1476236139324244141": "standup",
+  "1476236140121161820": "wild-rose",
+  "1476236140838129787": "compute-map",
+  "1476703452863135824": "research",
+  "1476703690290233425": "brainstorm",
+  "1476705116672360671": "new-salt",
+  "1478516133656264843": "wr-research",
+  "1478516181114818742": "cm-research",
+  "1478853706551267388": "studio-talk",
+  "1479596802566131834": "wildrose-drafts",
+  "1479927362601881610": "wildrose-ops",
 };
 
 function fmt(n: number): string {
@@ -129,7 +149,7 @@ function buildSourceGroups(sessions: TokenUsageSession[]): SourceGroup[] {
         const chanMatch = s.session_key.match(/:channel:(\d+)/);
         const chanId = chanMatch ? chanMatch[1] : "unknown";
         key = `discord:${chanId}`;
-        label = `Channel ...${chanId.slice(-6)}`;
+        label = CHANNEL_NAMES[chanId] ? `#${CHANNEL_NAMES[chanId]}` : `Channel ...${chanId.slice(-6)}`;
       }
       category = "discord";
     } else {
