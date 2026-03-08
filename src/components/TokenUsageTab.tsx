@@ -1,4 +1,4 @@
-import { useMemo } from "react";
+import { useMemo, useState } from "react";
 
 export type TokenUsageDaily = {
   date: string;
@@ -13,6 +13,18 @@ export type TokenUsageSession = {
   last_active: string;
 };
 
+export type DailySessionEntry = {
+  session_key: string;
+  model: string;
+  tokens: number;
+  estimated_cost_usd: number;
+};
+
+export type DailySessions = {
+  date: string;
+  sessions: DailySessionEntry[];
+};
+
 export type TokenUsageApi = {
   generated_at_utc: string;
   kpis: {
@@ -23,6 +35,7 @@ export type TokenUsageApi = {
   };
   daily_by_model: TokenUsageDaily[];
   sessions_today: TokenUsageSession[];
+  daily_sessions?: DailySessions[];
   active_cron_jobs?: number;
 };
 
@@ -403,42 +416,194 @@ function ModelSplitBar({ gemini, openai }: { gemini: number; openai: number }) {
   );
 }
 
+// ── Session label resolver ──
+function sessionLabel(sessionKey: string): string {
+  if (sessionKey === "agent:main:main") return "Main Session";
+  if (sessionKey.includes(":cron:")) {
+    const cronUuid = getCronId(sessionKey);
+    return cronUuid ? getCronName(cronUuid) : sessionKey.slice(0, 30);
+  }
+  if (sessionKey.includes(":discord:")) {
+    if (sessionKey.includes(":direct:")) return "Discord DMs";
+    const chanMatch = sessionKey.match(/:channel:(\d+)/);
+    if (chanMatch) {
+      const chanId = chanMatch[1];
+      return CHANNEL_NAMES[chanId] ? `#${CHANNEL_NAMES[chanId]}` : `Channel ...${chanId.slice(-6)}`;
+    }
+  }
+  return sessionKey.slice(0, 30);
+}
+
+function sessionCategory(sessionKey: string): string {
+  if (sessionKey === "agent:main:main") return "Main";
+  if (sessionKey.includes(":cron:")) return "Cron";
+  if (sessionKey.includes(":discord:")) return "Discord";
+  return "Other";
+}
+
+// ── Day detail lightbox ──
+function DayDetailModal({
+  date,
+  sessions,
+  onClose,
+}: {
+  date: string;
+  sessions: DailySessionEntry[];
+  onClose: () => void;
+}) {
+  // Deduplicate and group sessions by label
+  const grouped = useMemo(() => {
+    const map = new Map<string, { label: string; category: string; model: string; tokens: number; cost: number }>();
+    for (const s of sessions) {
+      const lbl = sessionLabel(s.session_key);
+      const cat = sessionCategory(s.session_key);
+      const key = `${lbl}:${s.model}`;
+      const prev = map.get(key);
+      if (prev) {
+        prev.tokens += s.tokens;
+        prev.cost += estimateCost(s.model, s.tokens);
+      } else {
+        map.set(key, { label: lbl, category: cat, model: s.model, tokens: s.tokens, cost: estimateCost(s.model, s.tokens) });
+      }
+    }
+    return [...map.values()].sort((a, b) => b.cost - a.cost);
+  }, [sessions]);
+
+  const totalCost = grouped.reduce((s, g) => s + g.cost, 0);
+  const totalTokens = grouped.reduce((s, g) => s + g.tokens, 0);
+
+  return (
+    <div
+      onClick={onClose}
+      style={{
+        position: "fixed", inset: 0, background: "rgba(0,0,0,0.75)",
+        display: "flex", alignItems: "center", justifyContent: "center", zIndex: 1000,
+      }}
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        style={{
+          background: "#111", border: "1px solid #333", borderRadius: 8,
+          padding: 24, maxWidth: 700, width: "90%", maxHeight: "80vh", overflow: "auto",
+        }}
+      >
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+          <h3 style={{ margin: 0 }}>
+            {shortDate(date)} — {usd(totalCost)} / {fmt(totalTokens)} tokens
+          </h3>
+          <button
+            onClick={onClose}
+            style={{
+              background: "none", border: "1px solid #555", color: "#fff",
+              borderRadius: 4, padding: "4px 10px", cursor: "pointer", fontSize: "0.9rem",
+            }}
+          >
+            Close
+          </button>
+        </div>
+        <table className="table table-tight" style={{ width: "100%" }}>
+          <thead>
+            <tr>
+              <th style={thStyle}>Source</th>
+              <th style={thStyle}>Type</th>
+              <th style={thStyle}>Model</th>
+              <th style={thRight}>Tokens</th>
+              <th style={thRight}>Est. Cost</th>
+              <th style={thRight}>%</th>
+            </tr>
+          </thead>
+          <tbody>
+            {grouped.map((g, i) => (
+              <tr key={i} style={{ borderTop: "1px solid #1a1a1a" }}>
+                <td style={{ padding: "6px", fontWeight: 600 }}>{g.label}</td>
+                <td style={{ padding: "6px", color: "#888", fontSize: "0.8rem" }}>{g.category}</td>
+                <td style={{ padding: "6px", color: "#888", fontSize: "0.8rem" }}>{g.model}</td>
+                <td style={{ padding: "6px", textAlign: "right" }}>{fmt(g.tokens)}</td>
+                <td style={{ padding: "6px", textAlign: "right", color: g.cost > 1 ? "#e05252" : "#fff" }}>{usd(g.cost)}</td>
+                <td style={{ padding: "6px", textAlign: "right", color: "#b7b7bf" }}>
+                  {totalCost ? ((g.cost / totalCost) * 100).toFixed(1) : 0}%
+                </td>
+              </tr>
+            ))}
+            <tr style={{ borderTop: "2px solid #333", fontWeight: 700 }}>
+              <td style={{ padding: "8px 6px" }} colSpan={3}>Total</td>
+              <td style={{ padding: "8px 6px", textAlign: "right" }}>{fmt(totalTokens)}</td>
+              <td style={{ padding: "8px 6px", textAlign: "right", color: "#e05252" }}>{usd(totalCost)}</td>
+              <td style={{ padding: "8px 6px", textAlign: "right" }}>100%</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
 // ── 7-day chart ──
-function DailyChart({ rows }: { rows: TokenUsageDaily[] }) {
+function DailyChart({ rows, dailySessions }: { rows: TokenUsageDaily[]; dailySessions?: DailySessions[] }) {
   const last7 = rows.slice(-7);
   const max = useMemo(
     () => Math.max(1, ...last7.map((r) => r.models.reduce((s, m) => s + m.tokens, 0))),
     [rows]
   );
+  const [selectedDate, setSelectedDate] = useState<string | null>(null);
+
+  const sessionsForDate = useMemo(() => {
+    if (!selectedDate || !dailySessions) return null;
+    return dailySessions.find((d) => d.date === selectedDate) ?? null;
+  }, [selectedDate, dailySessions]);
 
   return (
-    <div style={{ display: "grid", gap: 8 }}>
-      {last7.map((row) => {
-        const total = row.models.reduce((s, m) => s + m.tokens, 0);
-        const cost = row.models.reduce((s, m) => s + estimateCost(m.model, m.tokens), 0);
-        return (
-          <div key={row.date} className="daily-row">
-            <div className="muted">{shortDate(row.date)}</div>
-            <div className="mini-bar">
-              {row.models.map((m) => {
-                const width = total === 0 ? 0 : (m.tokens / max) * 100;
-                const color = /gemini/i.test(m.model) ? "#1a8f5c" : "#00338D";
-                return (
-                  <div
-                    key={m.model}
-                    style={{ width: `${width}%`, background: color }}
-                    className="mini-bar-seg"
-                    title={`${m.model}: ${fmt(m.tokens)} (${usd(estimateCost(m.model, m.tokens))})`}
-                  />
-                );
-              })}
+    <>
+      <div style={{ display: "grid", gap: 8 }}>
+        {last7.map((row) => {
+          const total = row.models.reduce((s, m) => s + m.tokens, 0);
+          const cost = row.models.reduce((s, m) => s + estimateCost(m.model, m.tokens), 0);
+          const hasDetail = dailySessions?.some((d) => d.date === row.date);
+          return (
+            <div key={row.date} className="daily-row">
+              <div className="muted">{shortDate(row.date)}</div>
+              <div className="mini-bar">
+                {row.models.map((m) => {
+                  const width = total === 0 ? 0 : (m.tokens / max) * 100;
+                  const color = /gemini/i.test(m.model) ? "#1a8f5c" : "#00338D";
+                  return (
+                    <div
+                      key={m.model}
+                      style={{ width: `${width}%`, background: color }}
+                      className="mini-bar-seg"
+                      title={`${m.model}: ${fmt(m.tokens)} (${usd(estimateCost(m.model, m.tokens))})`}
+                    />
+                  );
+                })}
+              </div>
+              <div className="right">{fmt(total)}</div>
+              <div className={`right ${cost > 5 ? "bad" : "muted"}`}>{usd(cost)}</div>
+              {hasDetail && (
+                <div
+                  onClick={() => setSelectedDate(row.date)}
+                  title="View spend breakdown"
+                  style={{
+                    cursor: "pointer", width: 20, height: 20, borderRadius: "50%",
+                    border: "1px solid #555", display: "flex", alignItems: "center",
+                    justifyContent: "center", fontSize: "0.7rem", color: "#888",
+                    marginLeft: 6, flexShrink: 0,
+                  }}
+                >
+                  i
+                </div>
+              )}
             </div>
-            <div className="right">{fmt(total)}</div>
-            <div className={`right ${cost > 5 ? "bad" : "muted"}`}>{usd(cost)}</div>
-          </div>
-        );
-      })}
-    </div>
+          );
+        })}
+      </div>
+      {selectedDate && sessionsForDate && (
+        <DayDetailModal
+          date={selectedDate}
+          sessions={sessionsForDate.sessions}
+          onClose={() => setSelectedDate(null)}
+        />
+      )}
+    </>
   );
 }
 
@@ -506,7 +671,7 @@ export function TokenUsageTab({ data }: { data: TokenUsageApi }) {
             <h3 className="section-title">7-Day Usage + Cost</h3>
           </div>
         </div>
-        <DailyChart rows={data.daily_by_model} />
+        <DailyChart rows={data.daily_by_model} dailySessions={data.daily_sessions} />
       </section>
     </div>
   );
