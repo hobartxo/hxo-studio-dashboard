@@ -1,7 +1,7 @@
 {
-  "generated_at_utc": "2026-03-09T04:00:00Z",
+  "generated_at_utc": "2026-03-10T04:00:00Z",
   "kpis": {
-    "daily_tokens": 1241476,
+    "daily_tokens": 1286906,
     "estimated_daily_cost_usd": 0,
     "gemini_percent": 100,
     "openai_percent": 0
@@ -107,12 +107,27 @@
       "models": [
         {
           "model": "gemini-2.5-flash",
-          "tokens": 564700,
+          "tokens": 8313888,
           "estimated_cost_usd": 0
         },
         {
           "model": "gemini-3.1-pro-preview",
-          "tokens": 676776,
+          "tokens": 3255406,
+          "estimated_cost_usd": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-03-10",
+      "models": [
+        {
+          "model": "gemini-2.5-flash",
+          "tokens": 686976,
+          "estimated_cost_usd": 0
+        },
+        {
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 599930,
           "estimated_cost_usd": 0
         }
       ]
@@ -120,109 +135,116 @@
   ],
   "sessions_today": [
     {
-      "session_key": "agent:main:main",
+      "session_key": "agent:main:discord:channel:1478853706551267388",
       "model": "gemini-3.1-pro-preview",
-      "tokens_today": 560099,
+      "tokens_today": 231473,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T03:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
-      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a",
-      "model": "gemini-2.5-flash",
-      "tokens_today": 97390,
+      "session_key": "agent:main:main",
+      "model": "gemini-3.1-pro-preview",
+      "tokens_today": 209393,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T03:12:01Z"
+      "last_active": "2026-03-10T03:12:01Z"
     },
     {
       "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde",
       "model": "gemini-2.5-flash",
-      "tokens_today": 87507,
+      "tokens_today": 141225,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
-      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:17cd43ec-f8a7-4d5f-b6ed-92d96a4ea430",
+      "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:315fc22a-31df-496b-be38-d4ac955b98b0",
       "model": "gemini-2.5-flash",
-      "tokens_today": 87507,
+      "tokens_today": 141225,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
+    },
+    {
+      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a",
+      "model": "gemini-2.5-flash",
+      "tokens_today": 99104,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-10T03:12:01Z"
+    },
+    {
+      "session_key": "agent:main:discord:channel:1476703452863135824",
+      "model": "gemini-3.1-pro-preview",
+      "tokens_today": 69405,
+      "estimated_cost_usd": 0,
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
       "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf",
       "model": "gemini-2.5-flash",
-      "tokens_today": 65182,
+      "tokens_today": 64205,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
-      "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:d223f21d-a4ed-4238-bddf-8b88d56d83ee",
+      "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:00a38064-962f-442a-b9f2-2e910c259a6f",
       "model": "gemini-2.5-flash",
-      "tokens_today": 65182,
+      "tokens_today": 64205,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
       "session_key": "agent:main:discord:channel:1478516181114818742",
       "model": "gemini-3.1-pro-preview",
-      "tokens_today": 64835,
+      "tokens_today": 54343,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
       "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc",
       "model": "gemini-2.5-flash",
-      "tokens_today": 32271,
+      "tokens_today": 38954,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
-      "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:a87447fe-6290-46f8-99d2-b272ca501abf",
+      "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:b4606c91-378a-46df-847f-8e3b05125bce",
       "model": "gemini-2.5-flash",
-      "tokens_today": 32271,
+      "tokens_today": 38954,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
       "session_key": "agent:main:discord:channel:1478516133656264843",
       "model": "gemini-3.1-pro-preview",
-      "tokens_today": 31612,
+      "tokens_today": 35316,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
-      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:de801110-9098-43c9-820d-cbeac19e790c",
+      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:ce890072-88a1-407f-b167-10a076402cb5",
       "model": "gemini-2.5-flash",
-      "tokens_today": 24386,
+      "tokens_today": 24788,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T02:12:01Z"
+      "last_active": "2026-03-10T02:12:01Z"
     },
     {
-      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:20342972-eecd-4f09-8db6-e94ee332f7c1",
+      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:bafb33bc-8301-4edd-9716-585a1daf47ff",
       "model": "gemini-2.5-flash",
-      "tokens_today": 24372,
+      "tokens_today": 24786,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T01:12:01Z"
+      "last_active": "2026-03-10T01:12:02Z"
     },
     {
-      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:ed2f403b-c896-4a74-96d9-6aff1b0fe363",
+      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:7c714269-6e97-4e88-9a6b-26443f9fb660",
       "model": "gemini-2.5-flash",
-      "tokens_today": 24340,
+      "tokens_today": 24778,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T00:12:01Z"
+      "last_active": "2026-03-10T03:12:01Z"
     },
     {
-      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:84eb02e2-1f93-483e-a85f-7ae01d03a4d2",
+      "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:6ac85cd5-2856-454c-be16-f984512704c3",
       "model": "gemini-2.5-flash",
-      "tokens_today": 24292,
+      "tokens_today": 24752,
       "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T03:12:01Z"
-    },
-    {
-      "session_key": "agent:main:discord:channel:1469088039656751138",
-      "model": "gemini-3.1-pro-preview",
-      "tokens_today": 20230,
-      "estimated_cost_usd": 0,
-      "last_active": "2026-03-09T00:12:01Z"
+      "last_active": "2026-03-10T00:12:01Z"
     }
   ],
   "daily_sessions": [
@@ -2189,19 +2211,121 @@
         {
           "session_key": "agent:main:main",
           "model": "gemini-3.1-pro-preview",
-          "tokens": 560099,
+          "tokens": 1350608,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:23630f4c-e7f7-4eaa-a723-ec9d9c5af15f",
+          "model": "gemini-2.5-flash",
+          "tokens": 1120235,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:23630f4c-e7f7-4eaa-a723-ec9d9c5af15f:run:a2e82756-3926-4fbb-b36f-977ee26d1607",
+          "model": "gemini-2.5-flash",
+          "tokens": 1009457,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e473e14a-0a07-4a5e-a02a-acf98f51a6a6:run:1b5a7388-2a89-45be-883b-d81ea62c9135",
+          "model": "gemini-2.5-flash",
+          "tokens": 832263,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e473e14a-0a07-4a5e-a02a-acf98f51a6a6",
+          "model": "gemini-2.5-flash",
+          "tokens": 635740,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1476236139324244141",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 551284,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1478853706551267388",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 513065,
           "estimated_cost_usd": 0
         },
         {
           "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a",
           "model": "gemini-2.5-flash",
-          "tokens": 97390,
+          "tokens": 419110,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1476703452863135824",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 349628,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e473e14a-0a07-4a5e-a02a-acf98f51a6a6:run:ee67de7e-095e-4795-ae90-bfcd3e328e82",
+          "model": "gemini-2.5-flash",
+          "tokens": 349304,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf",
+          "model": "gemini-2.5-flash",
+          "tokens": 323461,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3",
+          "model": "gemini-2.5-flash",
+          "tokens": 297467,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e473e14a-0a07-4a5e-a02a-acf98f51a6a6:run:f4a68bc0-b993-4d56-99ca-b844ce9af857",
+          "model": "gemini-2.5-flash",
+          "tokens": 286436,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1478516181114818742",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 270803,
           "estimated_cost_usd": 0
         },
         {
           "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde",
           "model": "gemini-2.5-flash",
-          "tokens": 87507,
+          "tokens": 268741,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc",
+          "model": "gemini-2.5-flash",
+          "tokens": 236559,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1478516133656264843",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 199788,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:23630f4c-e7f7-4eaa-a723-ec9d9c5af15f:run:3bb0d764-ed1b-4e0e-a33f-1956e5704ed5",
+          "model": "gemini-2.5-flash",
+          "tokens": 148513,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:23630f4c-e7f7-4eaa-a723-ec9d9c5af15f:run:e9b76d8a-9d77-4bea-a105-88213ab9afde",
+          "model": "gemini-2.5-flash",
+          "tokens": 110778,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:bc7f3d13-21cd-4ef5-924b-3eb4fc294953",
+          "model": "gemini-2.5-flash",
+          "tokens": 108409,
           "estimated_cost_usd": 0
         },
         {
@@ -2211,7 +2335,13 @@
           "estimated_cost_usd": 0
         },
         {
-          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf",
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:7a8ef69a-40ca-48eb-bcb6-ec42eff14e87",
+          "model": "gemini-2.5-flash",
+          "tokens": 87507,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:56fa0490-3b8d-41d6-a824-bfacf9d7a8f3",
           "model": "gemini-2.5-flash",
           "tokens": 65182,
           "estimated_cost_usd": 0
@@ -2223,15 +2353,99 @@
           "estimated_cost_usd": 0
         },
         {
-          "session_key": "agent:main:discord:channel:1478516181114818742",
-          "model": "gemini-3.1-pro-preview",
-          "tokens": 64835,
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:bea8a7d8-efe4-4ba0-818c-5d0c611629b1",
+          "model": "gemini-2.5-flash",
+          "tokens": 64903,
           "estimated_cost_usd": 0
         },
         {
-          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc",
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:8b62ca77-542a-48be-bb2b-e252b5b09241",
           "model": "gemini-2.5-flash",
-          "tokens": 32271,
+          "tokens": 64818,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:2900ee99-3614-4706-ac66-1be9ee71e43c",
+          "model": "gemini-2.5-flash",
+          "tokens": 64506,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:9f6b1f3b-f8d3-4026-9a06-c5e006cb9e5b",
+          "model": "gemini-2.5-flash",
+          "tokens": 64419,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:fc5030ad-f961-4d4b-bc81-b0cc73503281",
+          "model": "gemini-2.5-flash",
+          "tokens": 64052,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:bc7f3d13-21cd-4ef5-924b-3eb4fc294953:run:2efd774b-0dfc-4a92-8deb-b7c924303f25",
+          "model": "gemini-2.5-flash",
+          "tokens": 56322,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:94d65f0c-d7bc-4834-b1a4-497f48e9528d",
+          "model": "gemini-2.5-flash",
+          "tokens": 53199,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:bc7f3d13-21cd-4ef5-924b-3eb4fc294953:run:96660a34-a6a1-4bf5-ab1a-959d954c3d10",
+          "model": "gemini-2.5-flash",
+          "tokens": 52087,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:5a72f5ed-8d4b-40d1-b01b-48dc552eca93",
+          "model": "gemini-2.5-flash",
+          "tokens": 50263,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:ee8f419b-dae2-416d-a941-7124e1e69eba",
+          "model": "gemini-2.5-flash",
+          "tokens": 44812,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:80012fd3-2ff7-419e-8131-5d39cdfcfc9e",
+          "model": "gemini-2.5-flash",
+          "tokens": 42625,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:f0d4abfd-4baa-4a78-95bb-bb7cd520c2e1",
+          "model": "gemini-2.5-flash",
+          "tokens": 41413,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:83ed2642-927a-4a39-b4d1-473a9d05a2f0",
+          "model": "gemini-2.5-flash",
+          "tokens": 37780,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:591ff05f-4afb-46c3-a281-39c964737c23",
+          "model": "gemini-2.5-flash",
+          "tokens": 37658,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:bc7f3d13-21cd-4ef5-924b-3eb4fc294953:run:a68cd0cb-f697-4b19-8766-eed041227c8c",
+          "model": "gemini-2.5-flash",
+          "tokens": 37544,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:cd9e159f-f120-499a-ae7d-86d52f11720c",
+          "model": "gemini-2.5-flash",
+          "tokens": 35750,
           "estimated_cost_usd": 0
         },
         {
@@ -2241,9 +2455,147 @@
           "estimated_cost_usd": 0
         },
         {
-          "session_key": "agent:main:discord:channel:1478516133656264843",
-          "model": "gemini-3.1-pro-preview",
-          "tokens": 31612,
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:d34d950e-d3f7-415f-b6d2-9ec01c3ad3ff",
+          "model": "gemini-2.5-flash",
+          "tokens": 27866,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:1ee2e331-0c72-4c75-8152-f2358a86879a",
+          "model": "gemini-2.5-flash",
+          "tokens": 24821,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:7d901c3e-55fc-46f4-a5a1-75c5b6ead7cf",
+          "model": "gemini-2.5-flash",
+          "tokens": 24812,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:d611fbce-bfbe-473d-83ee-e14e0000e5c6",
+          "model": "gemini-2.5-flash",
+          "tokens": 24810,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:730f46e1-610d-42c1-a1c8-f98ce139cb99",
+          "model": "gemini-2.5-flash",
+          "tokens": 24802,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:90bb1233-1986-4067-bf53-6f59aaf94180",
+          "model": "gemini-2.5-flash",
+          "tokens": 24802,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:a794aa6a-0e76-4eb0-904e-3fb0b34475e4",
+          "model": "gemini-2.5-flash",
+          "tokens": 24800,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:dbb3580c-fc0a-4e0c-8664-1806fc1453b8",
+          "model": "gemini-2.5-flash",
+          "tokens": 24792,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:e93f1175-ca4c-4512-8f57-79c5d3f560b5",
+          "model": "gemini-2.5-flash",
+          "tokens": 24790,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:fed3010b-cf9a-4e48-a2b6-8e7f09af009f",
+          "model": "gemini-2.5-flash",
+          "tokens": 24788,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:b657f73b-1765-4f56-b76d-4108f7defcfa",
+          "model": "gemini-2.5-flash",
+          "tokens": 24773,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:a44102f3-6bc6-4c68-a42c-b59db46281ca",
+          "model": "gemini-2.5-flash",
+          "tokens": 24773,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:d854be4d-090c-45ba-845e-784c4f17b420",
+          "model": "gemini-2.5-flash",
+          "tokens": 24767,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:8ca49cce-8853-458e-b13c-9be3cef7fd07",
+          "model": "gemini-2.5-flash",
+          "tokens": 24753,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:faceb933-213f-4e0e-bb74-8261f22a3e3c",
+          "model": "gemini-2.5-flash",
+          "tokens": 24752,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:84b98432-a555-4536-96ed-dede43e8ff7a",
+          "model": "gemini-2.5-flash",
+          "tokens": 24748,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:55d53a1e-fd73-4908-86a1-d131c6b0e684",
+          "model": "gemini-2.5-flash",
+          "tokens": 24736,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:7c403623-f8a8-4a51-9e1b-3d99225a664e",
+          "model": "gemini-2.5-flash",
+          "tokens": 24729,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:4bab5721-aefd-48dd-ad6b-62e1eaf715e1",
+          "model": "gemini-2.5-flash",
+          "tokens": 24722,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:6dc06bb6-9c8b-4974-a131-2660949504a7",
+          "model": "gemini-2.5-flash",
+          "tokens": 24683,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:cbf9d9de-10d5-46f2-bc73-7f53e01108da",
+          "model": "gemini-2.5-flash",
+          "tokens": 24677,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:f27a6445-0731-496d-919c-ca9a41d9a8b2",
+          "model": "gemini-2.5-flash",
+          "tokens": 24671,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:a820c818-28ed-4475-a01a-07a25e540df3",
+          "model": "gemini-2.5-flash",
+          "tokens": 24660,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:54ded936-4c72-436f-8c71-8c96c7aa7be2",
+          "model": "gemini-2.5-flash",
+          "tokens": 24650,
           "estimated_cost_usd": 0
         },
         {
@@ -2259,6 +2611,66 @@
           "estimated_cost_usd": 0
         },
         {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:06f525dd-8f69-4b4b-a717-55fad9486506",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:22c8ffd8-375c-4615-ad43-33c655d8259a",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:3698589e-724f-4065-a78d-879b1955e790",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:38513750-5226-4beb-92af-13dbf455c07f",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:43658e50-2fd6-4da9-ba70-ae37060eed38",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:4ad01dc0-4009-41f2-a702-b4f555742071",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:598bd355-9e98-43f4-8fe8-a9d892ad4e19",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:a293b526-3203-4ffb-83ec-2a190385a704",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:d13f1dbd-f1f7-48b0-bc03-af14cbc5c296",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:e0c440bb-78dd-4aaf-8341-b2e2c87e93a7",
+          "model": "gemini-2.5-flash",
+          "tokens": 24366,
+          "estimated_cost_usd": 0
+        },
+        {
           "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:ed2f403b-c896-4a74-96d9-6aff1b0fe363",
           "model": "gemini-2.5-flash",
           "tokens": 24340,
@@ -2271,9 +2683,134 @@
           "estimated_cost_usd": 0
         },
         {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:9ccbfa58-826d-471c-9150-7b7e7b1a9f6b",
+          "model": "gemini-2.5-flash",
+          "tokens": 24286,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:718b0c5f-fe14-448b-8db8-ecaebda60ef3:run:c4eae396-ff88-4e44-8a96-63a0fdea92ac",
+          "model": "gemini-2.5-flash",
+          "tokens": 24286,
+          "estimated_cost_usd": 0
+        },
+        {
           "session_key": "agent:main:discord:channel:1469088039656751138",
           "model": "gemini-3.1-pro-preview",
           "tokens": 20230,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:1b455d63-d8ae-4071-9d00-93c044cdb5bb",
+          "model": "gemini-2.5-flash",
+          "tokens": 15408,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:1b455d63-d8ae-4071-9d00-93c044cdb5bb:run:9142683c-7bd8-4b1f-880a-0227e6cfe617",
+          "model": "gemini-2.5-flash",
+          "tokens": 15408,
+          "estimated_cost_usd": 0
+        }
+      ]
+    },
+    {
+      "date": "2026-03-10",
+      "sessions": [
+        {
+          "session_key": "agent:main:discord:channel:1478853706551267388",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 231473,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:main",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 209393,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde",
+          "model": "gemini-2.5-flash",
+          "tokens": 141225,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:339d2c77-b8ec-4612-bdae-344649f6bbde:run:315fc22a-31df-496b-be38-d4ac955b98b0",
+          "model": "gemini-2.5-flash",
+          "tokens": 141225,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a",
+          "model": "gemini-2.5-flash",
+          "tokens": 99104,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1476703452863135824",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 69405,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf",
+          "model": "gemini-2.5-flash",
+          "tokens": 64205,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:9fdeffe7-0e36-4af5-a423-4730dd3df0cf:run:00a38064-962f-442a-b9f2-2e910c259a6f",
+          "model": "gemini-2.5-flash",
+          "tokens": 64205,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1478516181114818742",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 54343,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc",
+          "model": "gemini-2.5-flash",
+          "tokens": 38954,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:ce4145e6-9860-427e-9846-966bf15e64dc:run:b4606c91-378a-46df-847f-8e3b05125bce",
+          "model": "gemini-2.5-flash",
+          "tokens": 38954,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:discord:channel:1478516133656264843",
+          "model": "gemini-3.1-pro-preview",
+          "tokens": 35316,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:ce890072-88a1-407f-b167-10a076402cb5",
+          "model": "gemini-2.5-flash",
+          "tokens": 24788,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:bafb33bc-8301-4edd-9716-585a1daf47ff",
+          "model": "gemini-2.5-flash",
+          "tokens": 24786,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:7c714269-6e97-4e88-9a6b-26443f9fb660",
+          "model": "gemini-2.5-flash",
+          "tokens": 24778,
+          "estimated_cost_usd": 0
+        },
+        {
+          "session_key": "agent:main:cron:e9791639-d999-42a5-8b89-5a1bf5932b1a:run:6ac85cd5-2856-454c-be16-f984512704c3",
+          "model": "gemini-2.5-flash",
+          "tokens": 24752,
           "estimated_cost_usd": 0
         }
       ]
